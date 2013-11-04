@@ -2,9 +2,10 @@ package com.github.dementati.teeshop;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
-public class HoleActivity extends Activity {
+public class HoleActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
