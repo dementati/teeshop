@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/fairway_hit_dist_edit"
-        android:text="@string/hole_fairway_hit"
+        android:text="@string/fairway_hit"
         android:textSize="14sp" />
 
     <TextView
