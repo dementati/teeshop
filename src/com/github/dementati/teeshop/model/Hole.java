@@ -5,41 +5,52 @@ import java.io.Serializable;
 public class Hole implements Serializable {
 	static final long serialVersionUID = 1L;
 	
-	private boolean fairwayHit;
-	private float fairwayHitDist;
-	private boolean greenHit;
-	private float greenHitDist;
-	private int puttCount;
+	private Boolean fairwayHit;
+	private Float fairwayHitDist;
+	private Boolean greenHit;
+	private Float greenHitDist;
+	private Integer puttCount;
 	
-	public Hole(boolean fairwayHit, 
-				float fairwayHitDist, 
-				boolean greenHit, 
-				float greenHitDist, 
-				int nPutts) {
-		this.fairwayHit = fairwayHit;
+	public Hole(Boolean fairwayHit, 
+				Float fairwayHitDist, 
+				Boolean greenHit, 
+				Float greenHitDist, 
+				Integer puttCount) {
+		if(fairwayHit == null) {
+			this.fairwayHit = Boolean.valueOf(false);
+		} else {
+			this.fairwayHit = fairwayHit;
+		}
+		
 		this.fairwayHitDist = fairwayHitDist;
-		this.greenHit = greenHit;
+		
+		if(greenHit == null) {
+			this.greenHit = Boolean.valueOf(false);
+		} else {
+			this.greenHit = greenHit;
+		}
+		
 		this.greenHitDist = greenHitDist;
-		this.puttCount = nPutts;
+		this.puttCount = puttCount;
 	}
 	
-	public boolean isFairwayHit() {
+	public Boolean isFairwayHit() {
 		return fairwayHit;
 	}
 	
-	public float getFairwayHitDist() {
+	public Float getFairwayHitDist() {
 		return fairwayHitDist;
 	}
 	
-	public boolean isGreenHit() {
+	public Boolean isGreenHit() {
 		return greenHit;
 	}
 	
-	public float getGreenHitDist() {
+	public Float getGreenHitDist() {
 		return greenHitDist;
 	}
 	
-	public int getPuttCount() {
+	public Integer getPuttCount() {
 		return puttCount;
 	}
 }

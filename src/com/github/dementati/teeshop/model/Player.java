@@ -68,20 +68,40 @@ public class Player {
 				for(Hole hole : round.getHoles()) {
 					Element holeElement = doc.createElement("Hole");
 					
-					String fairwayHitStr = hole.isFairwayHit() ? "true" : "false";
-					holeElement.setAttribute("fairwayHit", fairwayHitStr);
+					if(hole.isFairwayHit() == null) {
+						holeElement.setAttribute("fairwayHit", "");
+					} else {
+						String fairwayHitStr = hole.isFairwayHit() ? "true" : "false";
+						holeElement.setAttribute("fairwayHit", fairwayHitStr);
+					}
 					
-					String fairwayHitDistStr = Float.toString(hole.getFairwayHitDist());
-					holeElement.setAttribute("fairwayHitDist", fairwayHitDistStr);
+					if(hole.getFairwayHitDist() == null) {
+						holeElement.setAttribute("fairwayHitDist", "");
+					} else {
+						String fairwayHitDistStr = Float.toString(hole.getFairwayHitDist());
+						holeElement.setAttribute("fairwayHitDist", fairwayHitDistStr);
+					}
 					
-					String greenHitStr = hole.isGreenHit() ? "true" : "false";
-					holeElement.setAttribute("greenHit", greenHitStr);
+					if(hole.isGreenHit() == null) {
+						holeElement.setAttribute("greenHit", "");
+					} else {
+						String greenHitStr = hole.isGreenHit() ? "true" : "false";
+						holeElement.setAttribute("greenHit", greenHitStr);
+					}
 					
-					String greenHitDistStr = Float.toString(hole.getGreenHitDist());
-					holeElement.setAttribute("greenHitDist", greenHitDistStr);
+					if(hole.getGreenHitDist() == null) {
+						holeElement.setAttribute("greenHitDist", "");
+					} else {
+						String greenHitDistStr = Float.toString(hole.getGreenHitDist());
+						holeElement.setAttribute("greenHitDist", greenHitDistStr);
+					}
 					
-					String puttCountStr = Integer.toString(hole.getPuttCount());
-					holeElement.setAttribute("puttCount", puttCountStr);
+					if(hole.getPuttCount() == null) {
+						holeElement.setAttribute("puttCount", "");
+					} else {
+						String puttCountStr = Integer.toString(hole.getPuttCount());
+						holeElement.setAttribute("puttCount", puttCountStr);
+					}
 					
 					roundElement.appendChild(holeElement);
 				}
@@ -140,22 +160,39 @@ public class Player {
 				NodeList holeNodes = roundNode.getChildNodes();
 				for(int j = 0; j < holeNodes.getLength(); j++) {
 					Node holeNode = holeNodes.item(j);
-					boolean fairwayHit = holeNode.getAttributes()
+					Boolean fairwayHit = holeNode.getAttributes()
 							.getNamedItem("fairwayHit")
 							.getTextContent().equals("true");
-					float fairwayHitDist = Float.valueOf(holeNode.getAttributes()
+					
+					String fairwayHitDistStr = holeNode.getAttributes()
 							.getNamedItem("fairwayHitDist")
-							.getTextContent());
-					boolean greenHit = holeNode.getAttributes()
+							.getTextContent();
+					Float fairwayHitDist = null;
+					if(!fairwayHitDistStr.isEmpty()) {
+						fairwayHitDist = Float.valueOf(fairwayHitDistStr);
+					}
+		
+					Boolean greenHit = holeNode.getAttributes()
 							.getNamedItem("greenHit")
 							.getTextContent().equals("true");
-					float greenHitDist = Float.valueOf(holeNode.getAttributes()
+					
+					String greenHitDistStr = holeNode.getAttributes()
 							.getNamedItem("greenHitDist")
-							.getTextContent());
-					int nPutts = Integer.valueOf(holeNode.getAttributes()
+							.getTextContent();
+					Float greenHitDist = null;
+					if(!greenHitDistStr.isEmpty()) {
+						greenHitDist = Float.valueOf(greenHitDistStr);
+					}
+					
+					String puttCountStr = holeNode.getAttributes()
 							.getNamedItem("puttCount")
-							.getTextContent());
-					Hole hole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, nPutts);
+							.getTextContent();
+					Integer puttCount = null;
+					if(!puttCountStr.isEmpty()) {
+						puttCount = Integer.valueOf(puttCountStr);
+					}
+					
+					Hole hole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
 					round.addHole(hole);
 				}
 				

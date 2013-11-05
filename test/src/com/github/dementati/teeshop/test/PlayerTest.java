@@ -25,6 +25,7 @@ public class PlayerTest extends TestCase {
 	private Round round2;
 	private Hole hole1;
 	private Hole hole2;
+	private Hole hole3;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -51,6 +52,8 @@ public class PlayerTest extends TestCase {
 		hole1 = new Hole(true, 140.5f, true, 10.5f, 2);
 		
 		hole2 = new Hole(false, 145.7f, false, 9.0f, 3);
+		
+		hole3 = new Hole(null, null, null, null, null);
 	} 
 	
 	public void testSaveEmpty() {
@@ -88,6 +91,21 @@ public class PlayerTest extends TestCase {
 			String fileStr = readFile(playerName);
 			
 			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/></Round></Player>", fileStr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void testSaveOneRoundNullHole() {
+		try {				
+			round1.addHole(hole3);
+			player.addRound(round1);
+			player.save(dir);
+			
+			String fileStr = readFile(playerName);
+			
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,10 +198,36 @@ public class PlayerTest extends TestCase {
 			
 			Hole hole = player.getRounds().get(0).getHoles().get(0);
 			assertTrue(hole.isFairwayHit());
-			assertEquals(140.5f, hole.getFairwayHitDist());
+			assertEquals(140.5f, hole.getFairwayHitDist().floatValue());
 			assertTrue(hole.isGreenHit());
-			assertEquals(10.5f, hole.getGreenHitDist());
-			assertEquals(2, hole.getPuttCount());
+			assertEquals(10.5f, hole.getGreenHitDist().floatValue());
+			assertEquals(2, hole.getPuttCount().intValue());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void testLoadOneRoundNullHole() {
+		try {
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
+			
+			writeFile(playerName, fileStr);
+			player.load(dir);
+			
+			assertEquals("Bob", player.getName());
+			assertEquals(1, player.getRounds().size());
+			
+			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
+			
+			assertEquals(1, player.getRounds().get(0).getHoles().size());
+			
+			Hole hole = player.getRounds().get(0).getHoles().get(0);
+			assertFalse(hole.isFairwayHit());
+			assertEquals(null, hole.getFairwayHitDist());
+			assertFalse(hole.isGreenHit());
+			assertEquals(null, hole.getGreenHitDist());
+			assertEquals(null, hole.getPuttCount());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -208,10 +252,10 @@ public class PlayerTest extends TestCase {
 			
 			Hole hole1 = round1.getHoles().get(0);
 			assertTrue(hole1.isFairwayHit());
-			assertEquals(140.5f, hole1.getFairwayHitDist());
+			assertEquals(140.5f, hole1.getFairwayHitDist().floatValue());
 			assertTrue(hole1.isGreenHit());
-			assertEquals(10.5f, hole1.getGreenHitDist());
-			assertEquals(2, hole1.getPuttCount());
+			assertEquals(10.5f, hole1.getGreenHitDist().floatValue());
+			assertEquals(2, hole1.getPuttCount().intValue());
 			
 			Round round2 = player.getRounds().get(1);
 			
@@ -221,10 +265,10 @@ public class PlayerTest extends TestCase {
 			
 			Hole hole2 = round2.getHoles().get(0);
 			assertFalse(hole2.isFairwayHit());
-			assertEquals(145.7f, hole2.getFairwayHitDist());
+			assertEquals(145.7f, hole2.getFairwayHitDist().floatValue());
 			assertFalse(hole2.isGreenHit());
-			assertEquals(9.0f, hole2.getGreenHitDist());
-			assertEquals(3, hole2.getPuttCount());
+			assertEquals(9.0f, hole2.getGreenHitDist().floatValue());
+			assertEquals(3, hole2.getPuttCount().intValue());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,17 +293,17 @@ public class PlayerTest extends TestCase {
 			
 			Hole hole1 = round.getHoles().get(0);
 			assertTrue(hole1.isFairwayHit());
-			assertEquals(140.5f, hole1.getFairwayHitDist());
+			assertEquals(140.5f, hole1.getFairwayHitDist().floatValue());
 			assertTrue(hole1.isGreenHit());
-			assertEquals(10.5f, hole1.getGreenHitDist());
-			assertEquals(2, hole1.getPuttCount());
+			assertEquals(10.5f, hole1.getGreenHitDist().floatValue());
+			assertEquals(2, hole1.getPuttCount().intValue());
 			
 			Hole hole2 = round.getHoles().get(1);
 			assertFalse(hole2.isFairwayHit());
-			assertEquals(145.7f, hole2.getFairwayHitDist());
+			assertEquals(145.7f, hole2.getFairwayHitDist().floatValue());
 			assertFalse(hole2.isGreenHit());
-			assertEquals(9.0f, hole2.getGreenHitDist());
-			assertEquals(3, hole2.getPuttCount());
+			assertEquals(9.0f, hole2.getGreenHitDist().floatValue());
+			assertEquals(3, hole2.getPuttCount().intValue());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
