@@ -1,9 +1,12 @@
 package com.github.dementati.teeshop.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Round {
+public class Round implements Serializable {
+	static final long serialVersionUID = 1L;
+	
 	private Calendar date;
 	private ArrayList<Hole> holes = new ArrayList<Hole>();
 	

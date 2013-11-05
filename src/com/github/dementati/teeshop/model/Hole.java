@@ -1,6 +1,10 @@
 package com.github.dementati.teeshop.model;
 
-public class Hole {
+import java.io.Serializable;
+
+public class Hole implements Serializable {
+	static final long serialVersionUID = 1L;
+	
 	private boolean fairwayHit;
 	private float fairwayHitDist;
 	private boolean greenHit;

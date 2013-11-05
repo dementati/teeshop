@@ -4,5 +4,14 @@
     <string name="app_name">Teeshop</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hole">Hole</string>
+    <string name="hole_fairway_hit">Fairway hit</string>
+    <string name="fairway_hit_dist">Fairway hit distance</string>
+    <string name="green_hit_checkbox">Green hit</string>
+    <string name="green_hit_dist">Green hit distance</string>
+    <string name="putt_count">No. of putts</string>
+    <string name="action_next_hole">Next hole</string>
+    <string name="action_prev_hole">Previous hole</string>
+    <string name="action_round">Go to round</string>
 
 </resources>

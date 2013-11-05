@@ -1,9 +1,27 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:teeshop="http://schemas.android.com/apk/res-auto">    
+    
+    <item 
+        android:id="@+id/action_prev_hole" 
+        teeshop:showAsAction="always" 
+        android:icon="@drawable/ic_action_prev_hole" 
+        android:title="@string/action_prev_hole" />
+    
+    <item 
+        android:id="@+id/action_round" 
+        teeshop:showAsAction="always" 
+        android:icon="@drawable/ic_action_round" 
+        android:title="@string/action_round" />
+    
+    <item 
+        android:id="@+id/action_next_hole" 
+        teeshop:showAsAction="always" 
+        android:icon="@drawable/ic_action_next_hole" 
+        android:title="@string/action_next_hole" />
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        teeshop:showAsAction="never"
         android:title="@string/action_settings"/>
-
 </menu>

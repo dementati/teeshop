@@ -8,9 +8,85 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HoleActivity" >
 
-    <TextView
+    <CheckBox
+        android:id="@+id/fairway_hit_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/fairway_hit_dist_edit"
+        android:text="@string/hole_fairway_hit"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/fairway_hit_dist_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fairway_hit_dist_edit"
+        android:layout_alignBottom="@+id/fairway_hit_dist_edit"
+        android:text="@string/fairway_hit_dist"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/fairway_hit_dist_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fairway_hit_checkbox"
+        android:layout_toRightOf="@+id/fairway_hit_dist_text"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <CheckBox
+        android:id="@+id/green_hit_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fairway_hit_dist_text"
+        android:layout_below="@+id/fairway_hit_dist_edit"
+        android:text="@string/green_hit_checkbox"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/green_hit_dist_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fairway_hit_dist_edit"
+        android:layout_alignRight="@+id/fairway_hit_dist_edit"
+        android:layout_below="@+id/green_hit_checkbox"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/green_hit_dist_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/green_hit_dist_edit"
+        android:layout_alignBottom="@+id/green_hit_dist_edit"
+        android:layout_alignLeft="@+id/green_hit_checkbox"
+        android:text="@string/green_hit_dist"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/putt_count_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/green_hit_dist_edit"
+        android:layout_alignRight="@+id/green_hit_dist_edit"
+        android:layout_below="@+id/green_hit_dist_edit"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/putt_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/putt_count_edit"
+        android:layout_alignBottom="@+id/putt_count_edit"
+        android:layout_alignLeft="@+id/green_hit_dist_text"
+        android:text="@string/putt_count"
+        android:textSize="14sp" />
 
 </RelativeLayout>
