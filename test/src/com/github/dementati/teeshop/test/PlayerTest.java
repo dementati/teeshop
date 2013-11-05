@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -20,6 +19,12 @@ public class PlayerTest extends TestCase {
 	private File dir;
 	private String playerName;
 	private Player player;
+	private Calendar date1;
+	private Calendar date2;
+	private Round round1;
+	private Round round2;
+	private Hole hole1;
+	private Hole hole2;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -28,6 +33,24 @@ public class PlayerTest extends TestCase {
 		dir = new File(".");
 		playerName = "Bob";
 		player = new Player(playerName);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+		String dateStr1 = "2013-11-04";
+		date1 = Calendar.getInstance();
+		date1.setTime(sdf.parse(dateStr1));
+		
+		String dateStr2 = "2013-11-03";
+		date2 = Calendar.getInstance();
+		date2.setTime(sdf.parse(dateStr2));
+		
+		round1 = new Round(date1);
+		
+		round2 = new Round(date2);
+		
+		hole1 = new Hole(true, 140.5f, true, 10.5f, 2);
+		
+		hole2 = new Hole(false, 145.7f, false, 9.0f, 3);
 	} 
 	
 	public void testSaveEmpty() {
@@ -44,13 +67,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testSaveOneEmptyRound() {
 		try {
-			String dateStr = "2013-11-04";
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			Round round = new Round(date);
-			
-			player.addRound(round);
+			player.addRound(round1);
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
@@ -59,29 +76,13 @@ public class PlayerTest extends TestCase {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 	
 	public void testSaveOneRoundOneHole() {
-		try {
-			String dateStr = "2013-11-04";
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			Round round = new Round(date);
-			
-			boolean fairwayHit = true;
-			float fairwayHitDist = 140.5f;
-			boolean greenHit = true;
-			float greenHitDist = 10.5f;
-			int puttCount = 2;
-			Hole hole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
-			
-			round.addHole(hole);
-			player.addRound(round);
+		try {				
+			round1.addHole(hole1);
+			player.addRound(round1);
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
@@ -90,42 +91,13 @@ public class PlayerTest extends TestCase {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 	
 	public void testSaveTwoRoundsOneHole() {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
-			String dateStr = "2013-11-04";
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			Round round1 = new Round(date);
-			
-			boolean fairwayHit = true;
-			float fairwayHitDist = 140.5f;
-			boolean greenHit = true;
-			float greenHitDist = 10.5f;
-			int puttCount = 2;
-			Hole hole1 = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
-			
+		try {			
 			round1.addHole(hole1);
 			player.addRound(round1);
-			
-			String dateStr2 = "2013-11-03";
-			Calendar date2 = Calendar.getInstance();
-			date2.setTime(sdf.parse(dateStr2));
-			Round round2 = new Round(date2);
-			
-			boolean fairwayHit2 = false;
-			float fairwayHitDist2 = 145.7f;
-			boolean greenHit2 = false;
-			float greenHitDist2 = 9.0f;
-			int puttCount2 = 3;
-			Hole hole2 = new Hole(fairwayHit2, fairwayHitDist2, greenHit2, greenHitDist2, puttCount2);
 			
 			round2.addHole(hole2);
 			player.addRound(round2);
@@ -138,38 +110,14 @@ public class PlayerTest extends TestCase {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 	
 	public void testSaveOneRoundTwoHoles() {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
-			String dateStr = "2013-11-04";
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			Round round = new Round(date);
-			
-			boolean fairwayHit = true;
-			float fairwayHitDist = 140.5f;
-			boolean greenHit = true;
-			float greenHitDist = 10.5f;
-			int puttCount = 2;
-			Hole hole1 = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
-			
-			boolean fairwayHit2 = false;
-			float fairwayHitDist2 = 145.7f;
-			boolean greenHit2 = false;
-			float greenHitDist2 = 9.0f;
-			int puttCount2 = 3;
-			Hole hole2 = new Hole(fairwayHit2, fairwayHitDist2, greenHit2, greenHitDist2, puttCount2);
-			
-			round.addHole(hole1);
-			round.addHole(hole2);
-			player.addRound(round);
+		try {			
+			round1.addHole(hole1);
+			round1.addHole(hole2);
+			player.addRound(round1);
 			
 			player.save(dir);
 			
@@ -179,9 +127,6 @@ public class PlayerTest extends TestCase {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 	
@@ -210,17 +155,10 @@ public class PlayerTest extends TestCase {
 			assertEquals("Bob", player.getName());
 			assertEquals(1, player.getRounds().size());
 			
-			String dateStr = "2013-11-04";
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			assertEquals(0, date.compareTo(player.getRounds().get(0).getDate()));
+			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
 			
 			assertEquals(0, player.getRounds().get(0).getHoles().size());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -236,11 +174,7 @@ public class PlayerTest extends TestCase {
 			assertEquals("Bob", player.getName());
 			assertEquals(1, player.getRounds().size());
 			
-			String dateStr = "2013-11-04";
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			assertEquals(0, date.compareTo(player.getRounds().get(0).getDate()));
+			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
 			
 			assertEquals(1, player.getRounds().get(0).getHoles().size());
 			
@@ -251,9 +185,6 @@ public class PlayerTest extends TestCase {
 			assertEquals(10.5f, hole.getGreenHitDist());
 			assertEquals(2, hole.getPuttCount());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -269,14 +200,9 @@ public class PlayerTest extends TestCase {
 			assertEquals("Bob", player.getName());
 			assertEquals(2, player.getRounds().size());
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
 			Round round1 = player.getRounds().get(0);
 			
-			String dateStr = "2013-11-04";
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			assertEquals(0, date.compareTo(round1.getDate()));
+			assertEquals(0, date1.compareTo(round1.getDate()));
 			
 			assertEquals(1, round1.getHoles().size());
 			
@@ -289,9 +215,6 @@ public class PlayerTest extends TestCase {
 			
 			Round round2 = player.getRounds().get(1);
 			
-			String dateStr2 = "2013-11-03";
-			Calendar date2 = Calendar.getInstance();
-			date2.setTime(sdf.parse(dateStr2));
 			assertEquals(0, date2.compareTo(round2.getDate()));
 			
 			assertEquals(1, round2.getHoles().size());
@@ -303,9 +226,6 @@ public class PlayerTest extends TestCase {
 			assertEquals(9.0f, hole2.getGreenHitDist());
 			assertEquals(3, hole2.getPuttCount());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -323,11 +243,7 @@ public class PlayerTest extends TestCase {
 			
 			Round round = player.getRounds().get(0);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String dateStr = "2013-11-04";
-			Calendar date = Calendar.getInstance();
-			date.setTime(sdf.parse(dateStr));
-			assertEquals(0, date.compareTo(round.getDate()));
+			assertEquals(0, date1.compareTo(round.getDate()));
 			
 			assertEquals(2, round.getHoles().size());
 			
@@ -345,9 +261,6 @@ public class PlayerTest extends TestCase {
 			assertEquals(9.0f, hole2.getGreenHitDist());
 			assertEquals(3, hole2.getPuttCount());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
