@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -36,15 +37,26 @@ public class RoundActivity extends ActionBarActivity {
 		TableLayout t = (TableLayout)findViewById(R.id.round_table);
 		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		
-		int holeIndex = 1;
+		int holeIndex = 0;
 		for(Hole hole : round.getHoles()) {
 			TableRow tr = new TableRow(this);
 			tr.setLayoutParams(lp);
 			tr.setGravity(Gravity.CENTER_VERTICAL);
+			tr.setBackgroundResource(R.drawable.on_click_highlight);
+			final int fHoleIndex = holeIndex;
+			tr.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(RoundActivity.this, HoleActivity.class);
+					intent.putExtra(HoleActivity.ROUND, round);
+					intent.putExtra(HoleActivity.HOLE_INDEX, fHoleIndex);
+					startActivity(intent);
+				}
+			});
 			
 			TextView holeIndexText = new TextView(this);
 			holeIndexText.setLayoutParams(lp);
-			holeIndexText.setText(String.valueOf(holeIndex));
+			holeIndexText.setText(String.valueOf(holeIndex+1));
 			holeIndex++;
 			
 			ImageView fairwayHitImage = new ImageView(this);
