@@ -192,8 +192,7 @@ public class Player {
 						puttCount = Integer.valueOf(puttCountStr);
 					}
 					
-					Hole hole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
-					round.addHole(hole);
+					round.getHoles().set(j, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount));
 				}
 				
 				rounds.add(round);

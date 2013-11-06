@@ -12,18 +12,14 @@ public class Round implements Serializable {
 	
 	public Round(Calendar date) {
 		this.date = date;
+		
+		for(int i = 0; i < 18; i++) {
+			holes.add(new Hole(null, null, null, null, null));
+		}
 	}
 	
 	public ArrayList<Hole> getHoles() {
 		return holes;
-	}
-	
-	public void addHole(Hole hole) {
-		if(holes.size() >= 18) {
-			throw new IllegalAccessError("One round cannot have more than 18 holes.");
-		}
-		
-		holes.add(hole);
 	}
 	
 	public Calendar getDate() {

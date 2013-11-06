@@ -75,7 +75,7 @@ public class PlayerTest extends TestCase {
 			
 			String fileStr = readFile(playerName);
 			
-			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"/></Player>", fileStr);
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,13 +84,13 @@ public class PlayerTest extends TestCase {
 	
 	public void testSaveOneRoundOneHole() {
 		try {				
-			round1.addHole(hole1);
+			round1.getHoles().set(0, hole1);
 			player.addRound(round1);
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
 			
-			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/></Round></Player>", fileStr);
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,13 +99,13 @@ public class PlayerTest extends TestCase {
 	
 	public void testSaveOneRoundNullHole() {
 		try {				
-			round1.addHole(hole3);
+			round1.getHoles().set(0, hole3);
 			player.addRound(round1);
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
 			
-			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,17 +114,17 @@ public class PlayerTest extends TestCase {
 	
 	public void testSaveTwoRoundsOneHole() {
 		try {			
-			round1.addHole(hole1);
+			round1.getHoles().set(0, hole1);
 			player.addRound(round1);
 			
-			round2.addHole(hole2);
+			round2.getHoles().set(0, hole2);
 			player.addRound(round2);
 			
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
 			
-			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/></Round><Round date=\"2013-11-03\"><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/></Round></Player>", fileStr);
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round><Round date=\"2013-11-03\"><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,15 +133,15 @@ public class PlayerTest extends TestCase {
 	
 	public void testSaveOneRoundTwoHoles() {
 		try {			
-			round1.addHole(hole1);
-			round1.addHole(hole2);
+			round1.getHoles().set(0, hole1);
+			round1.getHoles().set(1, hole2);
 			player.addRound(round1);
 			
 			player.save(dir);
 			
 			String fileStr = readFile(playerName);
 			
-			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/></Round></Player>", fileStr);
+			assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>", fileStr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,7 +165,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testLoadOneEmptyRound() {
 		try {
-			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"/></Player>";
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
 			
 			writeFile(playerName, fileStr);
 			player.load(dir);
@@ -175,7 +175,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
 			
-			assertEquals(0, player.getRounds().get(0).getHoles().size());
+			assertEquals(18, player.getRounds().get(0).getHoles().size());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,7 +184,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testLoadOneRoundOneHole() {
 		try {
-			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/></Round></Player>";
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
 			
 			writeFile(playerName, fileStr);
 			player.load(dir);
@@ -194,7 +194,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
 			
-			assertEquals(1, player.getRounds().get(0).getHoles().size());
+			assertEquals(18, player.getRounds().get(0).getHoles().size());
 			
 			Hole hole = player.getRounds().get(0).getHoles().get(0);
 			assertTrue(hole.isFairwayHit());
@@ -210,7 +210,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testLoadOneRoundNullHole() {
 		try {
-			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
 			
 			writeFile(playerName, fileStr);
 			player.load(dir);
@@ -220,7 +220,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date1.compareTo(player.getRounds().get(0).getDate()));
 			
-			assertEquals(1, player.getRounds().get(0).getHoles().size());
+			assertEquals(18, player.getRounds().get(0).getHoles().size());
 			
 			Hole hole = player.getRounds().get(0).getHoles().get(0);
 			assertFalse(hole.isFairwayHit());
@@ -236,7 +236,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testLoadTwoRoundsOneHole() {
 		try {
-			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/></Round><Round date=\"2013-11-03\"><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/></Round></Player>";
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round><Round date=\"2013-11-03\"><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
 			
 			writeFile(playerName, fileStr);
 			player.load(dir);
@@ -248,7 +248,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date1.compareTo(round1.getDate()));
 			
-			assertEquals(1, round1.getHoles().size());
+			assertEquals(18, round1.getHoles().size());
 			
 			Hole hole1 = round1.getHoles().get(0);
 			assertTrue(hole1.isFairwayHit());
@@ -261,7 +261,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date2.compareTo(round2.getDate()));
 			
-			assertEquals(1, round2.getHoles().size());
+			assertEquals(18, round2.getHoles().size());
 			
 			Hole hole2 = round2.getHoles().get(0);
 			assertFalse(hole2.isFairwayHit());
@@ -277,7 +277,7 @@ public class PlayerTest extends TestCase {
 	
 	public void testLoadOneRoundTwoHoles() {
 		try {
-			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/></Round></Player>";
+			String fileStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Player><Round date=\"2013-11-04\"><Hole fairwayHit=\"true\" fairwayHitDist=\"140.5\" greenHit=\"true\" greenHitDist=\"10.5\" puttCount=\"2\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"145.7\" greenHit=\"false\" greenHitDist=\"9.0\" puttCount=\"3\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/><Hole fairwayHit=\"false\" fairwayHitDist=\"\" greenHit=\"false\" greenHitDist=\"\" puttCount=\"\"/></Round></Player>";
 			
 			writeFile(playerName, fileStr);
 			player.load(dir);
@@ -289,7 +289,7 @@ public class PlayerTest extends TestCase {
 			
 			assertEquals(0, date1.compareTo(round.getDate()));
 			
-			assertEquals(2, round.getHoles().size());
+			assertEquals(18, round.getHoles().size());
 			
 			Hole hole1 = round.getHoles().get(0);
 			assertTrue(hole1.isFairwayHit());

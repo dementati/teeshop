@@ -19,5 +19,6 @@
     <string name="green_hit_short">G. hit</string>
     <string name="green_hit_dist_short">G. dist.</string>
     <string name="putt_count_short"># putts</string>
+    <string name="save">Save</string>
 
 </resources>

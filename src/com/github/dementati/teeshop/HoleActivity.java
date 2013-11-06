@@ -163,14 +163,6 @@ public class HoleActivity extends ActionBarActivity {
 			puttCount = Integer.valueOf(puttCountStr);
 		}
 		
-		Hole hole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
-		
-		if(round.getHoles().size() < holeIndex) {
-			throw new IllegalStateException("holeIndex can only be one greater than the existing number of holes in the current round.");
-		} else if(round.getHoles().size() == holeIndex) {
-			round.addHole(hole);
-		} else {
-			round.getHoles().set(holeIndex, hole);
-		}
+		round.getHoles().set(holeIndex, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount));
 	}
 }
