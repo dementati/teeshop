@@ -26,6 +26,10 @@
             android:name="com.github.dementati.teeshop.RoundActivity"
             android:label="@string/title_activity_round" >
         </activity>
+        <activity
+            android:name="com.github.dementati.teeshop.RoundListActivity"
+            android:label="@string/title_activity_round_list" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,14 +3,18 @@ package com.github.dementati.teeshop;
 import java.text.SimpleDateFormat;
 
 import com.github.dementati.teeshop.model.Hole;
+import com.github.dementati.teeshop.model.Player;
 import com.github.dementati.teeshop.model.Round;
 
 import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -19,7 +23,9 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
 public class RoundActivity extends ActionBarActivity {
-
+	public final static String PROFILE = "Default";
+	public final static String ROUND_INDEX = "com.github.dementati.teeshop.ROUND_INDEX"; 
+	
 	private Round round;
 	
 	@Override
@@ -35,7 +41,7 @@ public class RoundActivity extends ActionBarActivity {
 		ab.setTitle(sdf.format(round.getDate().getTime()));
 		
 		TableLayout t = (TableLayout)findViewById(R.id.round_table);
-		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		
 		int holeIndex = 0;
 		for(Hole hole : round.getHoles()) {
@@ -50,6 +56,11 @@ public class RoundActivity extends ActionBarActivity {
 					Intent intent = new Intent(RoundActivity.this, HoleActivity.class);
 					intent.putExtra(HoleActivity.ROUND, round);
 					intent.putExtra(HoleActivity.HOLE_INDEX, fHoleIndex);
+					
+					if(getIntent().hasExtra(RoundActivity.ROUND_INDEX)) {
+						intent.putExtra(RoundActivity.ROUND_INDEX, getIntent().getIntExtra(RoundActivity.ROUND_INDEX, -1));
+					}
+					
 					startActivity(intent);
 				}
 			});
@@ -113,5 +124,53 @@ public class RoundActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.round, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.action_save:
+				save();
+				return true;
+		
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+		
+	}
 
+	private void save() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.save_dialog_message);
+		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Player player = new Player(PROFILE);
+				
+				player.load(getFilesDir());
+				
+				Intent intent = RoundActivity.this.getIntent();
+				if(intent.hasExtra(ROUND_INDEX)) {
+					int roundIndex = intent.getIntExtra(ROUND_INDEX, -1);
+					player.getRounds().set(roundIndex, round);
+				} else {
+					player.addRound(round);
+				}
+				
+				player.save(getFilesDir());
+				
+				Intent newIntent = new Intent(RoundActivity.this, RoundListActivity.class);
+				startActivity(newIntent);
+			}
+		});
+		
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
 }

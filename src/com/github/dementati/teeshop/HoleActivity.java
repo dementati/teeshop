@@ -76,6 +76,11 @@ public class HoleActivity extends ActionBarActivity {
 				saveData();
 				Intent intent = new Intent(this, RoundActivity.class);
 				intent.putExtra(ROUND, round);
+				
+				if(getIntent().hasExtra(RoundActivity.ROUND_INDEX)) {
+					intent.putExtra(RoundActivity.ROUND_INDEX, getIntent().getIntExtra(RoundActivity.ROUND_INDEX, -1));
+				}
+				
 				startActivity(intent);
 				return true;
 				
