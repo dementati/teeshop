@@ -21,7 +21,7 @@
     <string name="putt_count_short"># putts</string>
     <string name="save">Save</string>
     <string name="save_dialog_message">Are you sure you want to save?</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_round_list">RoundListActivity</string>
     <string name="delete_dialog_message">Are you sure you want to delete this round?</string>

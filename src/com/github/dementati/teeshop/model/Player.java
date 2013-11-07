@@ -61,7 +61,7 @@ public class Player {
 			for(Round round : rounds) {
 				Element roundElement = doc.createElement("Round");
 				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 				String dateStr = sdf.format(round.getDate().getTime());
 				roundElement.setAttribute("date", dateStr);
 				
@@ -151,7 +151,7 @@ public class Player {
 					.getNamedItem("date")
 					.getTextContent();
 				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 				Calendar date = Calendar.getInstance();
 				date.setTime(sdf.parse(dateStr));
 				

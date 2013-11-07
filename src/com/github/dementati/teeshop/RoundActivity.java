@@ -1,7 +1,5 @@
 package com.github.dementati.teeshop;
 
-import java.text.SimpleDateFormat;
-
 import com.github.dementati.teeshop.model.Hole;
 import com.github.dementati.teeshop.model.Player;
 import com.github.dementati.teeshop.model.Round;
@@ -44,8 +42,7 @@ public class RoundActivity extends ActionBarActivity {
 		round = (Round)intent.getSerializableExtra(HoleActivity.ROUND);
 		
 		ActionBar ab = getSupportActionBar();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		ab.setTitle(sdf.format(round.getDate().getTime()));
+		ab.setTitle(round.getDateString());
 		
 		TableLayout t = (TableLayout)findViewById(R.id.round_table);
 		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -122,7 +119,7 @@ public class RoundActivity extends ActionBarActivity {
 			tr.addView(greenHitImage);
 			tr.addView(greenHitDistText);
 			tr.addView(puttCountText);
-			t.addView(tr, new TableLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+			t.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		}
 	}
 

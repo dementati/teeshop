@@ -1,6 +1,7 @@
 package com.github.dementati.teeshop.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -24,5 +25,10 @@ public class Round implements Serializable {
 	
 	public Calendar getDate() {
 		return date;
+	}
+	
+	public String getDateString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		return sdf.format(date.getTime());
 	}
 }

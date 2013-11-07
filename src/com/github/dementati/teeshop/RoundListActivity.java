@@ -1,8 +1,6 @@
 package com.github.dementati.teeshop;
 
-import java.text.SimpleDateFormat;
 
-import com.github.dementati.teeshop.model.Hole;
 import com.github.dementati.teeshop.model.Player;
 import com.github.dementati.teeshop.model.Round;
 
@@ -14,7 +12,6 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -34,8 +31,6 @@ public class RoundListActivity extends Activity {
 		player.load(getFilesDir());
 		
 		final TableLayout t = (TableLayout)findViewById(R.id.round_list_table);
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		int roundIndex = 0;
 		for(Round round : player.getRounds()) {
@@ -63,8 +58,7 @@ public class RoundListActivity extends Activity {
 			roundDateParams.gravity = Gravity.CENTER_VERTICAL;
 			roundDateParams.weight = 1;
 			roundDateText.setLayoutParams(roundDateParams);
-			String roundDateStr = sdf.format(round.getDate().getTime());
-			roundDateText.setText(roundDateStr);
+			roundDateText.setText(round.getDateString());
 			
 			ImageView deleteImage = new ImageView(this);
 			LayoutParams deleteImageParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
