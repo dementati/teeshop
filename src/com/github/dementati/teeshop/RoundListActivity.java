@@ -9,8 +9,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -18,7 +21,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TableRow.LayoutParams;
 
-public class RoundListActivity extends Activity {
+public class RoundListActivity extends ActionBarActivity {
 
 	private Player player;
 	
@@ -26,6 +29,9 @@ public class RoundListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_round_list);
+		
+		ActionBar ab = getSupportActionBar();
+		ab.setTitle("Rounds");
 		
 		player = new Player(RoundActivity.PROFILE);
 		player.load(getFilesDir());
@@ -103,5 +109,19 @@ public class RoundListActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.round_list, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.action_stats:
+				Intent intent = new Intent(RoundListActivity.this, StatsActivity.class);
+				startActivity(intent);
+				return true;
+		
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+		
 	}
 }

@@ -31,4 +31,24 @@ public class Round implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		return sdf.format(date.getTime());
 	}
+	
+	public double fairwayHitFreq() {
+		int count = 0;
+		for(Hole hole : holes) {
+			if(hole.isFairwayHit()) {
+				count++;
+			}
+		}
+		return (double)count/(double)holes.size();
+	}
+	
+	public double greenHitFreq() {
+		int count = 0;
+		for(Hole hole : holes) {
+			if(hole.isGreenHit()) {
+				count++;
+			}
+		}
+		return (double)count/(double)holes.size();
+	}
 }

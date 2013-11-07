@@ -30,8 +30,11 @@
         </activity>
         <activity
             android:name="com.github.dementati.teeshop.RoundListActivity"
-            android:label="@string/title_activity_round_list"
-            android:noHistory="true" >
+            android:label="@string/title_activity_round_list" >
+        </activity>
+        <activity
+            android:name="com.github.dementati.teeshop.StatsActivity"
+            android:label="@string/title_activity_stats" >
         </activity>
     </application>
 
