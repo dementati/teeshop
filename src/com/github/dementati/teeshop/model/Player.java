@@ -132,7 +132,7 @@ public class Player {
 	public void load(File appDir) {
 		File file = new File(appDir, name);
 		if(!file.exists()) {
-			throw new IllegalStateException("Player file does not exist.");
+			return;
 		}
 		
 		rounds = new ArrayList<Round>();
