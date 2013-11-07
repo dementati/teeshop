@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
@@ -17,9 +18,11 @@ import android.widget.EditText;
 public class HoleActivity extends ActionBarActivity {
 	public final static String ROUND = "com.github.dementati.teeshop.ROUND";
 	public final static String HOLE_INDEX = "com.github.dementati.teeshop.HOLE_INDEX";
+	public final static String CHANGED = "com.github.dementati.teeshop.CHANGED";
 	
 	private Round round;
 	private int holeIndex = -1;
+	private boolean changed;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class HoleActivity extends ActionBarActivity {
 			round = new Round(date);
 			holeIndex = 0;
 		}
+
+		changed = intent.getBooleanExtra(CHANGED, false);
+		Log.d("HoleActivity", "changed = " + String.valueOf(changed));
 	}
 	
 	@Override
@@ -66,14 +72,18 @@ public class HoleActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.action_prev_hole:
-				saveData();
+				if(saveData()) {
+					changed = true;
+				}
 				holeIndex--;
 				supportInvalidateOptionsMenu();
 				initializeActivity();
 				return true;
 				
 			case R.id.action_round:
-				saveData();
+				if(saveData()) {
+					changed = true;
+				}
 				Intent intent = new Intent(this, RoundActivity.class);
 				intent.putExtra(ROUND, round);
 				
@@ -81,11 +91,15 @@ public class HoleActivity extends ActionBarActivity {
 					intent.putExtra(RoundActivity.ROUND_INDEX, getIntent().getIntExtra(RoundActivity.ROUND_INDEX, -1));
 				}
 				
+				intent.putExtra(CHANGED, changed);
+				
 				startActivity(intent);
 				return true;
 				
 			case R.id.action_next_hole:
-				saveData();
+				if(saveData()) {
+					changed = true;
+				}
 				holeIndex++;
 				supportInvalidateOptionsMenu();
 				initializeActivity();
@@ -140,7 +154,8 @@ public class HoleActivity extends ActionBarActivity {
 		}
 	}
 	
-	private void saveData() {		
+	// Returns true if data changed.
+	private boolean saveData() {		
 		CheckBox fairwayHitCheckBox = (CheckBox)findViewById(R.id.fairway_hit_checkbox);
 		Boolean fairwayHit = fairwayHitCheckBox.isChecked();
 		
@@ -168,6 +183,13 @@ public class HoleActivity extends ActionBarActivity {
 			puttCount = Integer.valueOf(puttCountStr);
 		}
 		
-		round.getHoles().set(holeIndex, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount));
+		Hole oldHole = round.getHoles().get(holeIndex);
+		Log.d("HoleActivity", "oldHole = " + oldHole);
+		Hole newHole = new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount);
+		Log.d("HoleActivity", "newHole = " + oldHole);
+		round.getHoles().set(holeIndex, newHole);
+		Log.d("HoleActivity", "oldHole.equals(newHole) = " + oldHole.equals(newHole));
+		
+		return !oldHole.equals(newHole);
 	}
 }

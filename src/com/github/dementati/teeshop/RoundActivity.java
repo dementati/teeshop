@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class RoundActivity extends ActionBarActivity {
 	public final static String ROUND_INDEX = "com.github.dementati.teeshop.ROUND_INDEX"; 
 	
 	private Round round;
+	private boolean changed;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,11 @@ public class RoundActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_round);
 		
 		Intent intent = getIntent();
+		
+		changed = intent.getBooleanExtra(HoleActivity.CHANGED, false);
+		
+		Log.d("RoundActivity", "changed = " + String.valueOf(changed));
+		
 		round = (Round)intent.getSerializableExtra(HoleActivity.ROUND);
 		
 		ActionBar ab = getSupportActionBar();
@@ -56,6 +63,7 @@ public class RoundActivity extends ActionBarActivity {
 					Intent intent = new Intent(RoundActivity.this, HoleActivity.class);
 					intent.putExtra(HoleActivity.ROUND, round);
 					intent.putExtra(HoleActivity.HOLE_INDEX, fHoleIndex);
+					intent.putExtra(HoleActivity.CHANGED, changed);
 					
 					if(getIntent().hasExtra(RoundActivity.ROUND_INDEX)) {
 						intent.putExtra(RoundActivity.ROUND_INDEX, getIntent().getIntExtra(RoundActivity.ROUND_INDEX, -1));
@@ -129,7 +137,12 @@ public class RoundActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.action_save:
-				save();
+				if(changed) {
+					save();
+				} else {
+					Intent newIntent = new Intent(RoundActivity.this, RoundListActivity.class);
+					startActivity(newIntent);
+				}
 				return true;
 		
 			default:
