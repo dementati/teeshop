@@ -8,6 +8,8 @@ import com.github.dementati.teeshop.model.Round;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.Menu;
@@ -31,19 +33,21 @@ public class RoundListActivity extends Activity {
 		player = new Player(RoundActivity.PROFILE);
 		player.load(getFilesDir());
 		
-		TableLayout t = (TableLayout)findViewById(R.id.round_list_table);
+		final TableLayout t = (TableLayout)findViewById(R.id.round_list_table);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		int roundIndex = 0;
 		for(Round round : player.getRounds()) {
+			final Round fRound = round;
+			final int fRoundIndex = roundIndex;
+			
 			TableRow tr = new TableRow(this);
+			final TableRow fTr = tr;
+			
 			tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			tr.setGravity(Gravity.CENTER_VERTICAL);
 			tr.setBackgroundResource(R.drawable.on_click_highlight);
-			
-			final Round fRound = round;
-			final int fRoundIndex = roundIndex;
 			tr.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -53,7 +57,6 @@ public class RoundListActivity extends Activity {
 					startActivity(intent);
 				}
 			});
-			roundIndex++;
 			
 			TextView roundDateText = new TextView(this);
 			LayoutParams roundDateParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -68,10 +71,36 @@ public class RoundListActivity extends Activity {
 			deleteImageParams.gravity = Gravity.CENTER_VERTICAL;
 			deleteImage.setLayoutParams(deleteImageParams);
 			deleteImage.setImageResource(R.drawable.ic_delete);
+			deleteImage.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(RoundListActivity.this);
+					builder.setMessage(R.string.delete_dialog_message);
+					builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							player.getRounds().remove(fRound);
+							t.removeView(fTr);
+							player.save(getFilesDir());
+						}
+					});
+					
+					builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					builder.create().show();
+				}
+			});
 			
 			tr.addView(roundDateText);
 			tr.addView(deleteImage);
 			t.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			
+			roundIndex++;
 		}
 	}
 
@@ -81,5 +110,4 @@ public class RoundListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.round_list, menu);
 		return true;
 	}
-
 }
