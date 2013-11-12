@@ -67,6 +67,7 @@ public class RoundActivity extends ActionBarActivity {
 					}
 					
 					startActivity(intent);
+					finish();
 				}
 			});
 			
@@ -132,16 +133,22 @@ public class RoundActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
 		switch(item.getItemId()) {
 			case R.id.action_save:
 				if(changed) {
 					save();
 				} else {
-					Intent newIntent = new Intent(RoundActivity.this, RoundListActivity.class);
-					startActivity(newIntent);
+					intent = new Intent(RoundActivity.this, RoundListActivity.class);
+					startActivity(intent);
+					finish();
 				}
 				return true;
 		
+			case R.id.action_settings:
+				intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+				
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -170,6 +177,7 @@ public class RoundActivity extends ActionBarActivity {
 				
 				Intent newIntent = new Intent(RoundActivity.this, RoundListActivity.class);
 				startActivity(newIntent);
+				finish();
 			}
 		});
 		
