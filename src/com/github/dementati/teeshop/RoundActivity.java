@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -133,26 +134,40 @@ public class RoundActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
 		switch(item.getItemId()) {
 			case R.id.action_save:
-				if(changed) {
-					save();
-				} else {
-					intent = new Intent(RoundActivity.this, RoundListActivity.class);
-					startActivity(intent);
-					finish();
-				}
+				goToRoundList();
 				return true;
 		
 			case R.id.action_settings:
-				intent = new Intent(this, SettingsActivity.class);
+				Intent intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
+				return true;
 				
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 		
+	}
+	
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            goToRoundList();
+            return true;
+        } else {
+        	return super.onKeyDown(keyCode, event);
+        }
+    }
+	
+	private void goToRoundList() {
+		if(changed) {
+			save();
+		} else {
+			Intent intent = new Intent(RoundActivity.this, RoundListActivity.class);
+			startActivity(intent);
+			finish();
+		}
 	}
 
 	private void save() {

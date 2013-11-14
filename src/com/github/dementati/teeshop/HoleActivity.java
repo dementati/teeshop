@@ -130,45 +130,6 @@ public class HoleActivity extends ActionBarActivity {
         }
     }
 	
-	/*
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		outState.putBoolean(FAIRWAY_HIT, getFairwayHit());
-		
-		Float fairwayHitDist = getFairwayHitDist();
-		if(fairwayHitDist == null) {
-			outState.putFloat(FAIRWAY_HIT_DIST, -1F);
-		} else {
-			outState.putFloat(FAIRWAY_HIT_DIST, fairwayHitDist);
-		}
-		
-		outState.putBoolean(GREEN_HIT, getGreenHit());
-		
-		Float greenHitDist = getGreenHitDist();
-		if(greenHitDist == null) {
-			outState.putFloat(GREEN_HIT_DIST, Float.NaN);
-		} else {
-			outState.putFloat(GREEN_HIT_DIST, greenHitDist);
-		}
-		
-		Integer puttCount = getPuttCount();
-		if(puttCount == null) {
-			outState.putInt(PUTT_COUNT, 0);
-		} else {
-			outState.putInt(PUTT_COUNT, getPuttCount());
-		}
-	}
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		restoreState(savedInstanceState);
-		
-		super.onRestoreInstanceState(savedInstanceState);
-	}
-	*/
-	
 	private void restoreState(Bundle savedInstanceState) {
 		if(savedInstanceState == null) {
 			return;

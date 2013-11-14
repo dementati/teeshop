@@ -82,6 +82,7 @@ public class StatsActivity extends Activity {
 			case R.id.action_settings:
 				intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
+				return true;
 		
 			default:
 				return super.onOptionsItemSelected(item);

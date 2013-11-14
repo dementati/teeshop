@@ -69,6 +69,7 @@ public class RoundListActivity extends ActionBarActivity {
 			case R.id.action_settings:
 				intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
+				return true;
 		
 			default:
 				return super.onOptionsItemSelected(item);
@@ -104,6 +105,7 @@ public class RoundListActivity extends ActionBarActivity {
 					intent.putExtra(HoleActivity.ROUND, fRound);
 					intent.putExtra(RoundActivity.ROUND_INDEX, fRoundIndex);
 					startActivity(intent);
+					finish();
 				}
 			});
 			
