@@ -10,12 +10,16 @@ public class Hole implements Serializable {
 	private Boolean greenHit;
 	private Float greenHitDist;
 	private Integer puttCount;
+	private Integer par;
+	private Float holeDistance;
 	
 	public Hole(Boolean fairwayHit, 
 				Float fairwayHitDist, 
 				Boolean greenHit, 
 				Float greenHitDist, 
-				Integer puttCount) {
+				Integer puttCount,
+				Integer par,
+				Float holeDistance) {
 		if(fairwayHit == null) {
 			this.fairwayHit = Boolean.valueOf(false);
 		} else {
@@ -32,6 +36,8 @@ public class Hole implements Serializable {
 		
 		this.greenHitDist = greenHitDist;
 		this.puttCount = puttCount;
+		this.par = par;
+		this.holeDistance = holeDistance;
 	}
 	
 	@Override
@@ -70,12 +76,24 @@ public class Hole implements Serializable {
 			return false;
 		}
 		
+		if(this.par != null && !this.par.equals(other.par)) {
+			return false;
+		} else if(this.par == null && other.par != null) {
+			return false;
+		}
+		
+		if(this.holeDistance != null && !this.holeDistance.equals(other.holeDistance)) {
+			return false;
+		} else if(this.holeDistance == null && other.holeDistance != null) {
+			return false;
+		}
+		
 		return equal;
 	}
 	
 	@Override
 	public String toString() {
-		return "Hole(" + fairwayHit + ", " + fairwayHitDist +", " + greenHit + ", " + greenHitDist + ", " + puttCount + ")";
+		return "Hole(" + fairwayHit + ", " + fairwayHitDist +", " + greenHit + ", " + greenHitDist + ", " + puttCount + ", " + par + ", " + holeDistance + ")";
 	}
 	
 	public Boolean isFairwayHit() {
@@ -98,5 +116,11 @@ public class Hole implements Serializable {
 		return puttCount;
 	}
 	
+	public Integer getPar() {
+		return par;
+	}
 	
+	public Float getHoleDistance() {
+		return holeDistance;
+	}
 }

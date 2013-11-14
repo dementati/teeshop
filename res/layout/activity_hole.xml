@@ -89,4 +89,44 @@
         android:text="@string/putt_count"
         android:textSize="14sp" />
 
+    <EditText
+        android:id="@+id/par_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/putt_count_edit"
+        android:layout_alignRight="@+id/putt_count_edit"
+        android:layout_below="@+id/putt_count_edit"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/par_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/par_edit"
+        android:layout_alignBottom="@+id/par_edit"
+        android:layout_alignLeft="@+id/putt_count_text"
+        android:text="@string/par"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/hole_distance_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/par_edit"
+        android:layout_alignRight="@+id/par_edit"
+        android:layout_below="@+id/par_edit"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/hole_distance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/hole_distance_edit"
+        android:layout_alignBottom="@+id/hole_distance_edit"
+        android:layout_alignLeft="@+id/par_text"
+        android:text="@string/hole_distance"
+        android:textSize="14sp" />
+
 </RelativeLayout>

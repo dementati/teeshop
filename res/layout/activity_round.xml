@@ -19,37 +19,57 @@
             android:id="@+id/hole_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hole" />
+            android:text="@string/hole"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/fairway_hit_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fairway_hit_short" />
+            android:text="@string/fairway_hit_short"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/fairway_hit_dist_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fairway_hit_dist_short" />
+            android:text="@string/fairway_hit_dist_short"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/green_hit_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/green_hit_short" />
+            android:text="@string/green_hit_short"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/green_hit_dist_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/green_hit_dist_short" />
+            android:text="@string/green_hit_dist_short"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/putt_count_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/putt_count_short" />
+            android:text="@string/putt_count_short"
+            android:textSize="12sp" />
+        
+        <TextView
+            android:id="@+id/par_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/par_short"
+            android:textSize="12sp" />
+        
+        <TextView
+            android:id="@+id/hole_distance_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hole_distance_short"
+            android:textSize="12sp" />
 
     </TableRow>
 

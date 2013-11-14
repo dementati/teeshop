@@ -5,7 +5,6 @@ import com.github.dementati.teeshop.model.Player;
 import com.github.dementati.teeshop.model.Round;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

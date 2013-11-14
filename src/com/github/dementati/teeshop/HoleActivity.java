@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewDebug.FlagToString;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -22,12 +21,6 @@ public class HoleActivity extends ActionBarActivity {
 	public final static String HOLE_INDEX = "com.github.dementati.teeshop.HOLE_INDEX";
 	public final static String CHANGED = "com.github.dementati.teeshop.CHANGED";
 	
-	private final static String FAIRWAY_HIT = "com.github.dementati.teeshop.FAIRWAY_HIT";
-	private final static String FAIRWAY_HIT_DIST = "com.github.dementati.teeshop.FAIRWAY_HIT_DIST";
-	private final static String GREEN_HIT = "com.github.dementati.teeshop.GREEN_HIT";
-	private final static String GREEN_HIT_DIST = "com.github.dementati.teeshop.GREEN_HIT_DIST";
-	private final static String PUTT_COUNT = "com.github.dementati.teeshop.PUTT_COUNT";
-	
 	private Round round;
 	private int holeIndex = -1;
 	private boolean changed;
@@ -35,8 +28,6 @@ public class HoleActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//restoreState(savedInstanceState);
-		
 		setContentView(R.layout.activity_hole);
 		
 		Intent intent = getIntent();
@@ -130,47 +121,6 @@ public class HoleActivity extends ActionBarActivity {
         }
     }
 	
-	private void restoreState(Bundle savedInstanceState) {
-		if(savedInstanceState == null) {
-			return;
-		}
-		
-		if(savedInstanceState.containsKey(FAIRWAY_HIT)) {
-			setFairwayHit(savedInstanceState.getBoolean(FAIRWAY_HIT));
-		}
-		
-		if(savedInstanceState.containsKey(FAIRWAY_HIT_DIST)) {
-			float fairwayHitDist = savedInstanceState.getFloat(FAIRWAY_HIT_DIST);
-			if(fairwayHitDist == Float.NaN) {
-				setFairwayHitDist(null);
-			} else {
-				setFairwayHitDist(fairwayHitDist);
-			}
-		}
-		
-		if(savedInstanceState.containsKey(GREEN_HIT)) {
-			setGreenHit(savedInstanceState.getBoolean(GREEN_HIT));
-		}
-		
-		if(savedInstanceState.containsKey(GREEN_HIT_DIST)) {
-			float greenHitDist = savedInstanceState.getFloat(GREEN_HIT_DIST);
-			if(greenHitDist == Float.NaN) {
-				setGreenHitDist(null);
-			} else {
-				setGreenHitDist(greenHitDist);
-			}
-		}
-		
-		if(savedInstanceState.containsKey(PUTT_COUNT)) {
-			int puttCount = savedInstanceState.getInt(PUTT_COUNT);
-			if(puttCount == 0) {
-				setPuttCount(null);
-			} else {
-				setPuttCount(puttCount);
-			}
-		}
-	}
-	
 	private void goToRound() {
 		if(saveData()) {
 			changed = true;
@@ -197,6 +147,8 @@ public class HoleActivity extends ActionBarActivity {
 		CheckBox greenHitCheckBox = (CheckBox)findViewById(R.id.green_hit_checkbox);
 		EditText greenHitDistEdit = (EditText)findViewById(R.id.green_hit_dist_edit);
 		EditText puttCountEdit = (EditText)findViewById(R.id.putt_count_edit);
+		EditText parEdit = (EditText)findViewById(R.id.par_edit);
+		EditText holeDistanceEdit = (EditText)findViewById(R.id.hole_distance_edit);
 		
 		if(round.getHoles().size() > holeIndex) {
 			Hole hole = round.getHoles().get(holeIndex);
@@ -222,12 +174,26 @@ public class HoleActivity extends ActionBarActivity {
 			} else {
 				puttCountEdit.setText("");
 			}
+			
+			if(hole.getPar() != null) {
+				parEdit.setText(String.valueOf(hole.getPar()));
+			} else {
+				parEdit.setText("");
+			}
+			
+			if(hole.getHoleDistance() != null) {
+				holeDistanceEdit.setText(String.valueOf(hole.getHoleDistance()));
+			} else {
+				holeDistanceEdit.setText("");
+			}
 		} else {
 			fairwayHitCheckBox.setChecked(false);
 			fairwayHitDistEdit.setText("");
 			greenHitCheckBox.setChecked(false);
 			greenHitDistEdit.setText("");
 			puttCountEdit.setText("");
+			parEdit.setText("");
+			holeDistanceEdit.setText("");
 		}
 	}
 	
@@ -240,7 +206,9 @@ public class HoleActivity extends ActionBarActivity {
 						 getFairwayHitDist(), 
 						 getGreenHit(), 
 						 getGreenHitDist(), 
-						 getPuttCount());
+						 getPuttCount(),
+						 getPar(),
+						 getHoleDistance());
 		Log.d("HoleActivity", "newHole = " + oldHole);
 		round.getHoles().set(holeIndex, newHole);
 		Log.d("HoleActivity", "oldHole.equals(newHole) = " + oldHole.equals(newHole));
@@ -251,11 +219,6 @@ public class HoleActivity extends ActionBarActivity {
 	private Boolean getFairwayHit() {
 		CheckBox fairwayHitCheckBox = (CheckBox)findViewById(R.id.fairway_hit_checkbox);
 		return fairwayHitCheckBox.isChecked();
-	}
-	
-	private void setFairwayHit(Boolean fairwayHit) {
-		CheckBox fairwayHitCheckBox = (CheckBox)findViewById(R.id.fairway_hit_checkbox);
-		fairwayHitCheckBox.setChecked(fairwayHit);
 	}
 	
 	private Float getFairwayHitDist() {
@@ -269,23 +232,9 @@ public class HoleActivity extends ActionBarActivity {
 		return fairwayHitDist;
 	}
 	
-	private void setFairwayHitDist(Float fairwayHitDist) {
-		EditText fairwayHitDistEdit = (EditText)findViewById(R.id.fairway_hit_dist_edit);
-		if(fairwayHitDist == null) {
-			fairwayHitDistEdit.setText("");
-		} else {
-			fairwayHitDistEdit.setText(fairwayHitDist.toString());
-		}
-	}
-	
 	private Boolean getGreenHit() {
 		CheckBox greenHitCheckBox = (CheckBox)findViewById(R.id.green_hit_checkbox);
 		return greenHitCheckBox.isChecked();
-	}
-	
-	private void setGreenHit(Boolean greenHit) {
-		CheckBox greenHitCheckBox = (CheckBox)findViewById(R.id.green_hit_checkbox);
-		greenHitCheckBox.setChecked(greenHit);
 	}
 	
 	private Float getGreenHitDist() {
@@ -299,15 +248,6 @@ public class HoleActivity extends ActionBarActivity {
 		return greenHitDist;
 	}
 	
-	private void setGreenHitDist(Float greenHitDist) {
-		EditText greenHitDistEdit = (EditText)findViewById(R.id.green_hit_dist_edit);
-		if(greenHitDist == null) {
-			greenHitDistEdit.setText("");
-		} else {
-			greenHitDistEdit.setText(greenHitDist.toString());
-		}
-	}
-	
 	private Integer getPuttCount() {
 		EditText puttCountEdit = (EditText)findViewById(R.id.putt_count_edit);
 		String puttCountStr = puttCountEdit.getText().toString();
@@ -319,12 +259,25 @@ public class HoleActivity extends ActionBarActivity {
 		return puttCount;
 	}
 	
-	private void setPuttCount(Integer puttCount) {
-		EditText puttCountEdit = (EditText)findViewById(R.id.putt_count_edit);
-		if(puttCount == null) {
-			puttCountEdit.setText("");
-		} else {
-			puttCountEdit.setText(puttCount);
+	private Integer getPar() {
+		EditText parEdit = (EditText)findViewById(R.id.par_edit);
+		String parStr = parEdit.getText().toString();
+		Integer par = null;
+		if(!parStr.isEmpty()) {
+			par = Integer.valueOf(parStr);
 		}
+		
+		return par;
+	}
+	
+	private Float getHoleDistance() {
+		EditText holeDistanceEdit = (EditText)findViewById(R.id.hole_distance_edit);
+		String holeDistanceStr = holeDistanceEdit.getText().toString();
+		Float holeDistance = null;
+		if(!holeDistanceStr.isEmpty()) {
+			holeDistance = Float.valueOf(holeDistanceStr);
+		}
+		
+		return holeDistance;
 	}
 }

@@ -29,5 +29,9 @@
     <string name="stats">Statistics</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="profile">Profile</string>
+    <string name="par">Par</string>
+    <string name="hole_distance">Hole distance</string>
+    <string name="par_short">Par</string>
+    <string name="hole_distance_short">H. dist.</string>
 
 </resources>

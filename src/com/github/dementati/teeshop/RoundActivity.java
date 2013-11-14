@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -75,11 +76,14 @@ public class RoundActivity extends ActionBarActivity {
 			TextView holeIndexText = new TextView(this);
 			holeIndexText.setLayoutParams(lp);
 			holeIndexText.setText(String.valueOf(holeIndex+1));
+			holeIndexText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 			holeIndex++;
 			
 			ImageView fairwayHitImage = new ImageView(this);
 			if(hole.isFairwayHit()) {
 				fairwayHitImage.setImageResource(R.drawable.ic_checked);
+			} else {
+				fairwayHitImage.setImageResource(R.drawable.ic_unchecked);
 			}
 			
 			TextView fairwayHitDistText = new TextView(this);
@@ -89,15 +93,14 @@ public class RoundActivity extends ActionBarActivity {
 				fairwayHitDistStr = String.valueOf(hole.getFairwayHitDist());
 			}
 			fairwayHitDistText.setText(fairwayHitDistStr);
+			fairwayHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 			
 			ImageView greenHitImage = new ImageView(this);
 			if(hole.isGreenHit()) {
 				greenHitImage.setImageResource(R.drawable.ic_checked);
+			} else {
+				greenHitImage.setImageResource(R.drawable.ic_unchecked);
 			}
-			
-			TextView greenHitText = new TextView(this);
-			greenHitText.setLayoutParams(lp);
-			greenHitText.setText(String.valueOf(hole.isGreenHit()));
 			
 			TextView greenHitDistText = new TextView(this);
 			greenHitDistText.setLayoutParams(lp);
@@ -106,6 +109,7 @@ public class RoundActivity extends ActionBarActivity {
 				greenHitDistStr = String.valueOf(hole.getGreenHitDist());
 			}
 			greenHitDistText.setText(greenHitDistStr);
+			greenHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 			
 			TextView puttCountText = new TextView(this);
 			puttCountText.setLayoutParams(lp);
@@ -114,6 +118,25 @@ public class RoundActivity extends ActionBarActivity {
 				puttCountStr = String.valueOf(hole.getPuttCount());
 			}
 			puttCountText.setText(puttCountStr);
+			puttCountText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			
+			TextView parText = new TextView(this);
+			parText.setLayoutParams(lp);
+			String parStr = "";
+			if(hole.getPar() != null) {
+				parStr = String.valueOf(hole.getPar());
+			}
+			parText.setText(parStr);
+			parText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			
+			TextView holeDistanceText = new TextView(this);
+			holeDistanceText.setLayoutParams(lp);
+			String holeDistanceStr = "";
+			if(hole.getHoleDistance() != null) {
+				holeDistanceStr = String.valueOf(hole.getHoleDistance());
+			}
+			holeDistanceText.setText(holeDistanceStr);
+			holeDistanceText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 			
 			tr.addView(holeIndexText);
 			tr.addView(fairwayHitImage);
@@ -121,6 +144,8 @@ public class RoundActivity extends ActionBarActivity {
 			tr.addView(greenHitImage);
 			tr.addView(greenHitDistText);
 			tr.addView(puttCountText);
+			tr.addView(parText);
+			tr.addView(holeDistanceText);
 			t.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		}
 	}

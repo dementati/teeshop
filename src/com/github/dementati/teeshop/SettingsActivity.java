@@ -1,6 +1,5 @@
 package com.github.dementati.teeshop;
 
-import java.io.File;
 
 import android.os.Bundle;
 import android.app.Activity;

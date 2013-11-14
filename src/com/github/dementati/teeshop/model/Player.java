@@ -103,6 +103,20 @@ public class Player {
 						holeElement.setAttribute("puttCount", puttCountStr);
 					}
 					
+					if(hole.getPar() == null) {
+						holeElement.setAttribute("par", "");
+					} else {
+						String parStr = Integer.toString(hole.getPar());
+						holeElement.setAttribute("par", parStr);
+					}
+					
+					if(hole.getHoleDistance() == null) {
+						holeElement.setAttribute("holeDistance", "");
+					} else {
+						String holeDistStr = Float.toString(hole.getHoleDistance());
+						holeElement.setAttribute("holeDistance", holeDistStr);
+					}
+					
 					roundElement.appendChild(holeElement);
 				}
 				
@@ -164,35 +178,69 @@ public class Player {
 							.getNamedItem("fairwayHit")
 							.getTextContent().equals("true");
 					
-					String fairwayHitDistStr = holeNode.getAttributes()
-							.getNamedItem("fairwayHitDist")
-							.getTextContent();
 					Float fairwayHitDist = null;
-					if(!fairwayHitDistStr.isEmpty()) {
-						fairwayHitDist = Float.valueOf(fairwayHitDistStr);
+					if(holeNode.getAttributes().getNamedItem("fairwayHitDist") != null) {
+						String fairwayHitDistStr = holeNode.getAttributes()
+								.getNamedItem("fairwayHitDist")
+								.getTextContent();
+						
+						if(!fairwayHitDistStr.isEmpty()) {
+							fairwayHitDist = Float.valueOf(fairwayHitDistStr);
+						}
 					}
-		
-					Boolean greenHit = holeNode.getAttributes()
-							.getNamedItem("greenHit")
-							.getTextContent().equals("true");
 					
-					String greenHitDistStr = holeNode.getAttributes()
-							.getNamedItem("greenHitDist")
-							.getTextContent();
+					Boolean greenHit = false;
+					if(holeNode.getAttributes().getNamedItem("greenHit") != null) {
+						greenHit = holeNode.getAttributes()
+								.getNamedItem("greenHit")
+								.getTextContent().equals("true");
+					}
+					
 					Float greenHitDist = null;
-					if(!greenHitDistStr.isEmpty()) {
-						greenHitDist = Float.valueOf(greenHitDistStr);
+					if(holeNode.getAttributes().getNamedItem("greenHitDist") != null) {
+						String greenHitDistStr = holeNode.getAttributes()
+								.getNamedItem("greenHitDist")
+								.getTextContent();
+						
+						if(!greenHitDistStr.isEmpty()) {
+							greenHitDist = Float.valueOf(greenHitDistStr);
+						}
 					}
 					
-					String puttCountStr = holeNode.getAttributes()
-							.getNamedItem("puttCount")
-							.getTextContent();
 					Integer puttCount = null;
-					if(!puttCountStr.isEmpty()) {
-						puttCount = Integer.valueOf(puttCountStr);
+					if(holeNode.getAttributes().getNamedItem("puttCount") != null) {
+						String puttCountStr = holeNode.getAttributes()
+								.getNamedItem("puttCount")
+								.getTextContent();
+						
+						if(!puttCountStr.isEmpty()) {
+							puttCount = Integer.valueOf(puttCountStr);
+						}
 					}
 					
-					round.getHoles().set(j, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount));
+					Integer par = null;
+					if(holeNode.getAttributes().getNamedItem("par") != null) {
+						String parStr = holeNode.getAttributes()
+								.getNamedItem("par")
+								.getTextContent();
+						
+						if(!parStr.isEmpty()) {
+							par = Integer.valueOf(parStr);
+						}
+					}
+					
+					Float holeDistance = null;
+					if(holeNode.getAttributes().getNamedItem("holeDistance") != null) {
+						String holeDistStr = holeNode.getAttributes()
+								.getNamedItem("holeDistance")
+								.getTextContent();
+						
+						if(!holeDistStr.isEmpty()) {
+							holeDistance = Float.valueOf(holeDistStr);
+						}
+					}
+					
+					round.getHoles().set(j, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount, par, holeDistance));
 				}
 				
 				rounds.add(round);

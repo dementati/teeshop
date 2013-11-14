@@ -15,7 +15,7 @@ public class Round implements Serializable {
 		this.date = date;
 		
 		for(int i = 0; i < 18; i++) {
-			holes.add(new Hole(null, null, null, null, null));
+			holes.add(new Hole(null, null, null, null, null, null, null));
 		}
 	}
 	

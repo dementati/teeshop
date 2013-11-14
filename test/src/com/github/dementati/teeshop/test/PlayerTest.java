@@ -49,11 +49,11 @@ public class PlayerTest extends TestCase {
 		
 		round2 = new Round(date2);
 		
-		hole1 = new Hole(true, 140.5f, true, 10.5f, 2);
+		hole1 = new Hole(true, 140.5f, true, 10.5f, 2, null, null);
 		
-		hole2 = new Hole(false, 145.7f, false, 9.0f, 3);
+		hole2 = new Hole(false, 145.7f, false, 9.0f, 3, null, null);
 		
-		hole3 = new Hole(null, null, null, null, null);
+		hole3 = new Hole(null, null, null, null, null, null, null);
 	} 
 	
 	public void testSaveEmpty() {
