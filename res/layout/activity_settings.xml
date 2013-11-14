@@ -8,9 +8,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingsActivity" >
 
-    <TextView
+    <AutoCompleteTextView
+        android:id="@+id/profile_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:text=""
+        android:textColor="@android:color/primary_text_light" />
+
+    <TextView
+        android:id="@+id/profile_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_edit"
+        android:layout_alignBottom="@+id/profile_edit"
+        android:layout_alignParentLeft="true"
+        android:text="@string/profile"
+        android:textSize="14sp"
+        android:textColor="@android:color/primary_text_light" />
 
 </RelativeLayout>

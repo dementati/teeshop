@@ -13,8 +13,11 @@ import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 public class StatsActivity extends Activity {
@@ -26,7 +29,10 @@ public class StatsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stats);
 		
-		Player player = new Player(RoundActivity.PROFILE);
+		SharedPreferences settings = getSharedPreferences(SettingsActivity.SETTINGS_FILE, MODE_PRIVATE);
+		String profile = settings.getString(SettingsActivity.SETTINGS_PROFILE, "Default");
+		
+		Player player = new Player(profile);
 		player.load(getFilesDir());
 		
 		ArrayList<GraphViewData> fairwayHitData = new ArrayList<GraphViewData>();
@@ -67,6 +73,20 @@ public class StatsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.stats, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch(item.getItemId()) {
+			case R.id.action_settings:
+				intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+		
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+		
 	}
 
 }

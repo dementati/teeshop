@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -22,7 +23,6 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
 public class RoundActivity extends ActionBarActivity {
-	public final static String PROFILE = "Default";
 	public final static String ROUND_INDEX = "com.github.dementati.teeshop.ROUND_INDEX"; 
 	
 	private Round round;
@@ -161,7 +161,10 @@ public class RoundActivity extends ActionBarActivity {
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Player player = new Player(PROFILE);
+				SharedPreferences settings = getSharedPreferences(SettingsActivity.SETTINGS_FILE, MODE_PRIVATE);
+				String profile = settings.getString(SettingsActivity.SETTINGS_PROFILE, "Default");
+				
+				Player player = new Player(profile);
 				
 				player.load(getFilesDir());
 				

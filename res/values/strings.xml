@@ -28,5 +28,6 @@
     <string name="title_activity_stats">StatsActivity</string>
     <string name="stats">Statistics</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="profile">Profile</string>
 
 </resources>

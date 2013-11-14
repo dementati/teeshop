@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -32,11 +33,58 @@ public class RoundListActivity extends ActionBarActivity {
 		
 		ActionBar ab = getSupportActionBar();
 		ab.setTitle("Rounds");
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		
-		player = new Player(RoundActivity.PROFILE);
+		initialize();
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		
+		initialize();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.round_list, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.action_stats:
+				Intent intent = new Intent(RoundListActivity.this, StatsActivity.class);
+				startActivity(intent);
+				return true;
+				
+			case R.id.action_settings:
+				intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+		
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+		
+	}
+	
+	private void initialize() {
+		SharedPreferences settings = getSharedPreferences(SettingsActivity.SETTINGS_FILE, MODE_PRIVATE);
+		String profile = settings.getString(SettingsActivity.SETTINGS_PROFILE, "Default");
+		
+		player = new Player(profile);
 		player.load(getFilesDir());
 		
 		final TableLayout t = (TableLayout)findViewById(R.id.round_list_table);
+		t.removeAllViews();
 		
 		int roundIndex = 0;
 		for(Round round : player.getRounds()) {
@@ -102,26 +150,5 @@ public class RoundListActivity extends ActionBarActivity {
 			
 			roundIndex++;
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.round_list, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()) {
-			case R.id.action_stats:
-				Intent intent = new Intent(RoundListActivity.this, StatsActivity.class);
-				startActivity(intent);
-				return true;
-		
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-		
 	}
 }
