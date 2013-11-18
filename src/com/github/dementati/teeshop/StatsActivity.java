@@ -36,16 +36,20 @@ public class StatsActivity extends Activity {
 		player.load(getFilesDir());
 		
 		ArrayList<GraphViewData> fairwayHitData = new ArrayList<GraphViewData>();
+		ArrayList<GraphViewData> transportHitData = new ArrayList<GraphViewData>();
 		ArrayList<GraphViewData> greenHitData = new ArrayList<GraphViewData>();
 		int n = player.getRounds().size();
 		for(int i = (n - 1 - LATEST_ROUNDS >= 0 ? n - 1 - LATEST_ROUNDS : 0); i < n; i++) {
 			Round round = player.getRounds().get(i);
 			fairwayHitData.add(new GraphViewData(i, round.fairwayHitFreq()));
+			transportHitData.add(new GraphViewData(i, round.transportHitFreq()));
 			greenHitData.add(new GraphViewData(i, round.greenHitFreq()));
 		}
 		GraphViewSeriesStyle fairwayHitSeriesStyle = new GraphViewSeriesStyle(Color.rgb(0, 153, 204), 4);
+		GraphViewSeriesStyle transportHitSeriesStyle = new GraphViewSeriesStyle(Color.rgb(153, 51, 204), 4);
 		GraphViewSeriesStyle greenHitSeriesStyle = new GraphViewSeriesStyle(Color.rgb(102, 156, 0), 4);
 		GraphViewSeries fairwayHitSeries = new GraphViewSeries("Fairway hit freq.", fairwayHitSeriesStyle, fairwayHitData.toArray(new GraphViewData[0]));
+		GraphViewSeries transportHitSeries = new GraphViewSeries("Transport hit freq.", transportHitSeriesStyle, transportHitData.toArray(new GraphViewData[0]));
 		GraphViewSeries greenHitSeries = new GraphViewSeries("Green hit freq.", greenHitSeriesStyle, greenHitData.toArray(new GraphViewData[0]));
 
 		GraphView graphView = new LineGraphView(this, "");
@@ -57,6 +61,7 @@ public class StatsActivity extends Activity {
 		graphView.setHorizontalLabels(new String[0]);
 		graphView.setVerticalLabels(new String[] {"100%", "0%"});
 		graphView.addSeries(fairwayHitSeries);
+		graphView.addSeries(transportHitSeries);
 		graphView.addSeries(greenHitSeries);
 		
 		

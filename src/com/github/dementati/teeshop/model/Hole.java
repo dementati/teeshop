@@ -7,6 +7,8 @@ public class Hole implements Serializable {
 	
 	private Boolean fairwayHit;
 	private Float fairwayHitDist;
+	private Boolean transportHit;
+	private Float transportHitDist;
 	private Boolean greenHit;
 	private Float greenHitDist;
 	private Integer puttCount;
@@ -15,6 +17,8 @@ public class Hole implements Serializable {
 	
 	public Hole(Boolean fairwayHit, 
 				Float fairwayHitDist, 
+				Boolean transportHit,
+				Float transportHitDist,
 				Boolean greenHit, 
 				Float greenHitDist, 
 				Integer puttCount,
@@ -27,6 +31,14 @@ public class Hole implements Serializable {
 		}
 		
 		this.fairwayHitDist = fairwayHitDist;
+		
+		if(transportHit == null) {
+			this.transportHit = Boolean.valueOf(false);
+		} else {
+			this.transportHit = transportHit;
+		}
+		
+		this.transportHitDist = transportHitDist;
 		
 		if(greenHit == null) {
 			this.greenHit = Boolean.valueOf(false);
@@ -55,6 +67,18 @@ public class Hole implements Serializable {
 		if(this.fairwayHitDist != null && !this.fairwayHitDist.equals(other.fairwayHitDist)) {
 			return false;
 		} else if(this.fairwayHitDist == null && other.fairwayHitDist != null) {
+			return false;
+		}
+		
+		if(this.transportHit != null && !this.transportHit.equals(other.transportHit)) {
+			return false;
+		} else if(this.transportHit == null && other.transportHit != null) {
+			return false;
+		}
+		
+		if(this.transportHitDist != null && !this.transportHitDist.equals(other.transportHitDist)) {
+			return false;
+		} else if(this.transportHitDist == null && other.transportHitDist != null) {
 			return false;
 		}
 		
@@ -93,7 +117,7 @@ public class Hole implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Hole(" + fairwayHit + ", " + fairwayHitDist +", " + greenHit + ", " + greenHitDist + ", " + puttCount + ", " + par + ", " + holeDistance + ")";
+		return "Hole(" + fairwayHit + ", " + fairwayHitDist +", " + transportHit + ", " + transportHitDist + ", " + greenHit + ", " + greenHitDist + ", " + puttCount + ", " + par + ", " + holeDistance + ")";
 	}
 	
 	public Boolean isFairwayHit() {
@@ -102,6 +126,14 @@ public class Hole implements Serializable {
 	
 	public Float getFairwayHitDist() {
 		return fairwayHitDist;
+	}
+	
+	public Boolean isTransportHit() {
+		return transportHit;
+	}
+	
+	public Float getTransportHitDist() {
+		return transportHitDist;
 	}
 	
 	public Boolean isGreenHit() {

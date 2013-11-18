@@ -82,6 +82,20 @@ public class Player {
 						holeElement.setAttribute("fairwayHitDist", fairwayHitDistStr);
 					}
 					
+					if(hole.isTransportHit() == null) {
+						holeElement.setAttribute("transportHit", "");
+					} else {
+						String transportHitStr = hole.isTransportHit() ? "true" : "false";
+						holeElement.setAttribute("transportHit", transportHitStr);
+					}
+					
+					if(hole.getTransportHitDist() == null) {
+						holeElement.setAttribute("transportHitDist", "");
+					} else {
+						String transportHitDistStr = Float.toString(hole.getTransportHitDist());
+						holeElement.setAttribute("transportHitDist", transportHitDistStr);
+					}
+					
 					if(hole.isGreenHit() == null) {
 						holeElement.setAttribute("greenHit", "");
 					} else {
@@ -174,9 +188,13 @@ public class Player {
 				NodeList holeNodes = roundNode.getChildNodes();
 				for(int j = 0; j < holeNodes.getLength(); j++) {
 					Node holeNode = holeNodes.item(j);
-					Boolean fairwayHit = holeNode.getAttributes()
-							.getNamedItem("fairwayHit")
-							.getTextContent().equals("true");
+					
+					Boolean fairwayHit = false;
+					if(holeNode.getAttributes().getNamedItem("fairwayHit") != null) {
+						fairwayHit = holeNode.getAttributes()
+								.getNamedItem("fairwayHit")
+								.getTextContent().equals("true");
+					}
 					
 					Float fairwayHitDist = null;
 					if(holeNode.getAttributes().getNamedItem("fairwayHitDist") != null) {
@@ -186,6 +204,24 @@ public class Player {
 						
 						if(!fairwayHitDistStr.isEmpty()) {
 							fairwayHitDist = Float.valueOf(fairwayHitDistStr);
+						}
+					}
+					
+					Boolean transportHit = false;
+					if(holeNode.getAttributes().getNamedItem("transportHit") != null) {
+						transportHit = holeNode.getAttributes()
+								.getNamedItem("transportHit")
+								.getTextContent().equals("true");
+					}
+					
+					Float transportHitDist = null;
+					if(holeNode.getAttributes().getNamedItem("transportHitDist") != null) {
+						String transportHitDistStr = holeNode.getAttributes()
+								.getNamedItem("transportHitDist")
+								.getTextContent();
+						
+						if(!transportHitDistStr.isEmpty()) {
+							transportHitDist = Float.valueOf(transportHitDistStr);
 						}
 					}
 					
@@ -240,7 +276,7 @@ public class Player {
 						}
 					}
 					
-					round.getHoles().set(j, new Hole(fairwayHit, fairwayHitDist, greenHit, greenHitDist, puttCount, par, holeDistance));
+					round.getHoles().set(j, new Hole(fairwayHit, fairwayHitDist, transportHit, transportHitDist, greenHit, greenHitDist, puttCount, par, holeDistance));
 				}
 				
 				rounds.add(round);

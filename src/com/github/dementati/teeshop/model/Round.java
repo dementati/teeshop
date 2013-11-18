@@ -15,7 +15,7 @@ public class Round implements Serializable {
 		this.date = date;
 		
 		for(int i = 0; i < 18; i++) {
-			holes.add(new Hole(null, null, null, null, null, null, null));
+			holes.add(new Hole(null, null, null, null, null, null, null, null, null));
 		}
 	}
 	
@@ -36,6 +36,16 @@ public class Round implements Serializable {
 		int count = 0;
 		for(Hole hole : holes) {
 			if(hole.isFairwayHit()) {
+				count++;
+			}
+		}
+		return (double)count/(double)holes.size();
+	}
+	
+	public double transportHitFreq() {
+		int count = 0;
+		for(Hole hole : holes) {
+			if(hole.isTransportHit()) {
 				count++;
 			}
 		}

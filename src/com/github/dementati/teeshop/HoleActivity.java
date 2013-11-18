@@ -50,17 +50,6 @@ public class HoleActivity extends ActionBarActivity {
 		
 		initializeActivity();
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-	
-	@Override
-	protected void onRestart() {
-		// TODO Auto-generated method stub
-		super.onRestart();
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,6 +133,8 @@ public class HoleActivity extends ActionBarActivity {
 		
 		CheckBox fairwayHitCheckBox = (CheckBox)findViewById(R.id.fairway_hit_checkbox);
 		EditText fairwayHitDistEdit = (EditText)findViewById(R.id.fairway_hit_dist_edit);
+		CheckBox transportHitCheckBox = (CheckBox)findViewById(R.id.transport_hit_checkbox);
+		EditText transportHitDistEdit = (EditText)findViewById(R.id.transport_hit_dist_edit);
 		CheckBox greenHitCheckBox = (CheckBox)findViewById(R.id.green_hit_checkbox);
 		EditText greenHitDistEdit = (EditText)findViewById(R.id.green_hit_dist_edit);
 		EditText puttCountEdit = (EditText)findViewById(R.id.putt_count_edit);
@@ -159,6 +150,14 @@ public class HoleActivity extends ActionBarActivity {
 				fairwayHitDistEdit.setText(String.valueOf(hole.getFairwayHitDist()));
 			} else {
 				fairwayHitDistEdit.setText("");
+			}
+			
+			transportHitCheckBox.setChecked(hole.isTransportHit());
+			
+			if(hole.getTransportHitDist() != null) {
+				transportHitDistEdit.setText(String.valueOf(hole.getTransportHitDist()));
+			} else {
+				transportHitDistEdit.setText("");
 			}
 			
 			greenHitCheckBox.setChecked(hole.isGreenHit());
@@ -189,6 +188,8 @@ public class HoleActivity extends ActionBarActivity {
 		} else {
 			fairwayHitCheckBox.setChecked(false);
 			fairwayHitDistEdit.setText("");
+			transportHitCheckBox.setChecked(false);
+			transportHitDistEdit.setText("");
 			greenHitCheckBox.setChecked(false);
 			greenHitDistEdit.setText("");
 			puttCountEdit.setText("");
@@ -204,6 +205,8 @@ public class HoleActivity extends ActionBarActivity {
 		Hole newHole = 
 				new Hole(getFairwayHit(), 
 						 getFairwayHitDist(), 
+						 getTransportHit(),
+						 getTransportHitDist(),
 						 getGreenHit(), 
 						 getGreenHitDist(), 
 						 getPuttCount(),
@@ -230,6 +233,22 @@ public class HoleActivity extends ActionBarActivity {
 		}
 		
 		return fairwayHitDist;
+	}
+	
+	private Boolean getTransportHit() {
+		CheckBox transportHitCheckBox = (CheckBox)findViewById(R.id.transport_hit_checkbox);
+		return transportHitCheckBox.isChecked();
+	}
+	
+	private Float getTransportHitDist() {
+		EditText transportHitDistEdit = (EditText)findViewById(R.id.transport_hit_dist_edit);
+		String transportHitDistStr = transportHitDistEdit.getText().toString();
+		Float transportHitDist = null;
+		if(!transportHitDistStr.isEmpty()) {
+			transportHitDist = Float.valueOf(transportHitDistStr);
+		}
+		
+		return transportHitDist;
 	}
 	
 	private Boolean getGreenHit() {

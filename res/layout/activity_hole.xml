@@ -37,68 +37,6 @@
         android:ems="10"
         android:inputType="numberDecimal" />
 
-    <CheckBox
-        android:id="@+id/green_hit_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fairway_hit_dist_text"
-        android:layout_below="@+id/fairway_hit_dist_edit"
-        android:text="@string/green_hit_checkbox"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/green_hit_dist_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fairway_hit_dist_edit"
-        android:layout_alignRight="@+id/fairway_hit_dist_edit"
-        android:layout_below="@+id/green_hit_checkbox"
-        android:ems="10"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/green_hit_dist_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/green_hit_dist_edit"
-        android:layout_alignBottom="@+id/green_hit_dist_edit"
-        android:layout_alignLeft="@+id/green_hit_checkbox"
-        android:text="@string/green_hit_dist"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/putt_count_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/green_hit_dist_edit"
-        android:layout_alignRight="@+id/green_hit_dist_edit"
-        android:layout_below="@+id/green_hit_dist_edit"
-        android:ems="10"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/putt_count_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/putt_count_edit"
-        android:layout_alignBottom="@+id/putt_count_edit"
-        android:layout_alignLeft="@+id/green_hit_dist_text"
-        android:text="@string/putt_count"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/par_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/putt_count_edit"
-        android:layout_alignRight="@+id/putt_count_edit"
-        android:layout_below="@+id/putt_count_edit"
-        android:ems="10"
-        android:inputType="number" />
-
     <TextView
         android:id="@+id/par_text"
         android:layout_width="wrap_content"
@@ -110,14 +48,99 @@
         android:textSize="14sp" />
 
     <EditText
+        android:id="@+id/green_hit_dist_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/transport_hit_dist_edit"
+        android:layout_below="@+id/green_hit_checkbox"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/putt_count_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/transport_hit_dist_edit"
+        android:layout_below="@+id/green_hit_dist_text"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/par_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/transport_hit_dist_edit"
+        android:layout_below="@+id/putt_count_text"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
         android:id="@+id/hole_distance_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/par_edit"
-        android:layout_alignRight="@+id/par_edit"
+        android:layout_alignLeft="@+id/transport_hit_dist_edit"
         android:layout_below="@+id/par_edit"
         android:ems="10"
         android:inputType="numberDecimal" />
+
+    <CheckBox
+        android:id="@+id/transport_hit_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fairway_hit_dist_text"
+        android:layout_alignRight="@+id/fairway_hit_dist_edit"
+        android:layout_below="@+id/fairway_hit_dist_edit"
+        android:text="@string/transport_hit"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/transport_hit_dist_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fairway_hit_dist_edit"
+        android:layout_below="@+id/transport_hit_checkbox"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/transport_hit_dist_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/transport_hit_dist_edit"
+        android:layout_alignBottom="@+id/transport_hit_dist_edit"
+        android:layout_toLeftOf="@+id/transport_hit_dist_edit"
+        android:text="@string/transport_hit_dist"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/green_hit_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/transport_hit_dist_text"
+        android:layout_alignRight="@+id/green_hit_dist_edit"
+        android:layout_below="@+id/transport_hit_dist_edit"
+        android:text="@string/green_hit_checkbox"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/green_hit_dist_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/green_hit_dist_edit"
+        android:layout_alignBottom="@+id/green_hit_dist_edit"
+        android:layout_alignLeft="@+id/green_hit_checkbox"
+        android:text="@string/green_hit_dist"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/putt_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/putt_count_edit"
+        android:layout_alignBottom="@+id/putt_count_edit"
+        android:layout_alignLeft="@+id/green_hit_dist_text"
+        android:text="@string/putt_count"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/hole_distance_text"

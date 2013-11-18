@@ -33,5 +33,9 @@
     <string name="hole_distance">Hole distance</string>
     <string name="par_short">Par</string>
     <string name="hole_distance_short">H. dist.</string>
+    <string name="transport_hit_dist">Distance to hole</string>
+    <string name="transport_hit">Transport hit</string>
+    <string name="transport_hit_short">T. hit</string>
+    <string name="transport_hit_dist_short">T. dist.</string>
 
 </resources>

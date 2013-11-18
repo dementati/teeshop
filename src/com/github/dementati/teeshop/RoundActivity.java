@@ -76,7 +76,7 @@ public class RoundActivity extends ActionBarActivity {
 			TextView holeIndexText = new TextView(this);
 			holeIndexText.setLayoutParams(lp);
 			holeIndexText.setText(String.valueOf(holeIndex+1));
-			holeIndexText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			holeIndexText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			holeIndex++;
 			
 			ImageView fairwayHitImage = new ImageView(this);
@@ -93,7 +93,23 @@ public class RoundActivity extends ActionBarActivity {
 				fairwayHitDistStr = String.valueOf(hole.getFairwayHitDist());
 			}
 			fairwayHitDistText.setText(fairwayHitDistStr);
-			fairwayHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			fairwayHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+			
+			ImageView transportHitImage = new ImageView(this);
+			if(hole.isTransportHit()) {
+				transportHitImage.setImageResource(R.drawable.ic_checked);
+			} else {
+				transportHitImage.setImageResource(R.drawable.ic_unchecked);
+			}
+			
+			TextView transportHitDistText = new TextView(this);
+			transportHitDistText.setLayoutParams(lp);
+			String transportHitDistStr = "";
+			if(hole.getTransportHitDist() != null) {
+				transportHitDistStr = String.valueOf(hole.getTransportHitDist());
+			}
+			transportHitDistText.setText(transportHitDistStr);
+			transportHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			
 			ImageView greenHitImage = new ImageView(this);
 			if(hole.isGreenHit()) {
@@ -109,7 +125,7 @@ public class RoundActivity extends ActionBarActivity {
 				greenHitDistStr = String.valueOf(hole.getGreenHitDist());
 			}
 			greenHitDistText.setText(greenHitDistStr);
-			greenHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			greenHitDistText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			
 			TextView puttCountText = new TextView(this);
 			puttCountText.setLayoutParams(lp);
@@ -118,7 +134,7 @@ public class RoundActivity extends ActionBarActivity {
 				puttCountStr = String.valueOf(hole.getPuttCount());
 			}
 			puttCountText.setText(puttCountStr);
-			puttCountText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			puttCountText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			
 			TextView parText = new TextView(this);
 			parText.setLayoutParams(lp);
@@ -127,7 +143,7 @@ public class RoundActivity extends ActionBarActivity {
 				parStr = String.valueOf(hole.getPar());
 			}
 			parText.setText(parStr);
-			parText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			parText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			
 			TextView holeDistanceText = new TextView(this);
 			holeDistanceText.setLayoutParams(lp);
@@ -136,11 +152,13 @@ public class RoundActivity extends ActionBarActivity {
 				holeDistanceStr = String.valueOf(hole.getHoleDistance());
 			}
 			holeDistanceText.setText(holeDistanceStr);
-			holeDistanceText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+			holeDistanceText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
 			
 			tr.addView(holeIndexText);
 			tr.addView(fairwayHitImage);
 			tr.addView(fairwayHitDistText);
+			tr.addView(transportHitImage);
+			tr.addView(transportHitDistText);
 			tr.addView(greenHitImage);
 			tr.addView(greenHitDistText);
 			tr.addView(puttCountText);
